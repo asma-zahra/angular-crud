@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
-import { AddUserComponent } from './add-user/add-user.component'
+import { AddUserComponent } from './add-user/add-user.component';
+import { DummyTableComponent } from './dummy-table/dummy-table.component'
 @NgModule({
   declarations: [
     AppComponent,
-    AddUserComponent
+    AddUserComponent,
+    DummyTableComponent
   ],
   imports: [
     BrowserModule,
