@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-add-user',
@@ -11,13 +13,14 @@ export class AddUserComponent implements OnInit {
 
   formGroup: FormGroup;
   titleAlert: string = 'This field is required';
-  post: any = '';
+  post: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder
+    ,private service: UserService, private router:Router) { }
 
   ngOnInit() {
     this.createForm();
-    this.setChangeValidate()
+    this.setChangeValidate();
   }
 
   createForm() {
@@ -25,8 +28,11 @@ export class AddUserComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       'email': [null, [Validators.required, Validators.pattern(emailregex)], this.checkInUseEmail],
       'name': [null, Validators.required],
-      'password': [null, [Validators.required, this.checkPassword]],
-      'description': [null, [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+      'lastname': [null, Validators.required],
+      'employeeid': [null, [Validators.required, this.checkemployeeid]],
+      'designation':[null,[Validators.required]],
+  
+
       'validate': ''
     });
   }
@@ -49,10 +55,10 @@ export class AddUserComponent implements OnInit {
     return this.formGroup.get('name') as FormControl
   }
 
-  checkPassword(control) {
-    let enteredPassword = control.value
-    let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
-    return (!passwordCheck.test(enteredPassword) && enteredPassword) ? { 'requirements': true } : null;
+  checkemployeeid(control) {
+    let enteredemployeeid = control.value
+    let employeeidCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    return (!employeeidCheck.test(enteredemployeeid) && enteredemployeeid) ? { 'requirements': true } : null;
   }
 
   checkInUseEmail(control) {
@@ -73,13 +79,14 @@ export class AddUserComponent implements OnInit {
         this.formGroup.get('email').hasError('alreadyInUse') ? 'This emailaddress is already in use' : '';
   }
 
-  getErrorPassword() {
-    return this.formGroup.get('password').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
-      this.formGroup.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
+  getErrorEmployeeid() {
+    return this.formGroup.get('employeeid').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
+      this.formGroup.get('employeeid').hasError('requirements') ? 'employee id needs to be at least eight characters, one uppercase letter and one number' : '';
   }
 
-  onSubmit(post) {
-    this.post = post;
+  onSubmit(data) {
+    this.post = data;
+    this.service.addUser(data);
+    
   }
-
 }

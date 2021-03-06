@@ -1,25 +1,35 @@
 <mat-card>
   <mat-card-content>
-    <div class="header" color="primary">
-      <h1>LOGIN</h1>
-      </div>
+    <mat-toolbar class="tool" color="primary">
+      <span class="fill-remaining-space">LOGIN FORM</span>
+    </mat-toolbar>
       <form name="loginform" [formGroup]="loginform">
-        <div class="email-input">
-          <mat-label>Email:</mat-label>
+        <div class="input">
+          <mat-label>Username:</mat-label><br>
           <mat-form-field class="full-width" appearance="outline" >
-            <input formControlName="email" matInput required />
+            <input type="text" placeholder="enter user name"formControlName="username" matInput required />
+            <mat-error  *ngIf="!loginform.controls['username'].valid && loginform.controls['username'].touched">
+               username is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="input">
+          <mat-label>Email:</mat-label><br>
+          <mat-form-field class="full-width" appearance="outline" >
+            <input placeholder="enter email" formControlName="email" matInput required />
             <mat-error  *ngIf="!loginform.controls['email'].valid && loginform.controls['email'].touched">
                Email address is required
             </mat-error>
           </mat-form-field>
         </div>
 
-          
-            <div class="email-input">
-              <mat-label>Password:</mat-label>
-            <mat-form-field class="width" appearance="outline">
+        
+            <div class="input">
+              <mat-label>Password:</mat-label><br>
+            <mat-form-field class=" full-width" appearance="outline">
               <input matInput placeholder="Password" formControlName="password">
-              <mat-hint>Choose a password of at least eight characters</mat-hint>
+              <mat-hint class="hint">Choose a password of at least eight characters</mat-hint>
           
               <mat-error *ngIf="!loginform.controls['password'].valid && loginform.controls['password'].touched">
                 password is required
@@ -27,9 +37,7 @@
             </mat-form-field><br><br>
             <button (click)="onlogin()" mat-flat-button color="primary" [disabled]="loginform.invalid">login</button>
         </div>
-
-
-
       </form>
   </mat-card-content>
 </mat-card>
+
