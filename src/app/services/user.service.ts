@@ -37,17 +37,19 @@ export class UserService implements OnInit {
   }
 
   addUser(data){
-   // this.myarray.push(data);
+   this.myarray.push(data);
   
-   sessionStorage.setItem("arr",JSON.stringify(data));
    this.router.navigate(['/viewuser']);
      
   }
 
 list(){
-  //return this.myarray;
+  return this.myarray;
  
-  return  JSON.parse(sessionStorage.getItem("arr"));;
+  
+}
+univertsitydata(){
+  return this.http.get(`http://universities.hipolabs.com/search?country=United+Kingdom`)
 }
   // Login
   //userLogin(user): Observable<any> {

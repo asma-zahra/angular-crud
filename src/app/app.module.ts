@@ -7,19 +7,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { AddUserComponent } from './add-user/add-user.component';
-import { DummyTableComponent } from './dummy-table/dummy-table.component';
 import{TableComponent} from './table/table.component';
 import { LoginComponent  } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import{EdituserComponent } from './edituser/edituser.component';
 import{ViewuserComponent } from './viewuser/viewuser.component';
 import { MatTableModule } from '@angular/material/table';
+import { DialogueboxComponent } from './viewuser/dialoguebox/dialoguebox.component'
+import { ApiIntegrationTableComponent } from './api-integration-table/api-integration-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddUserComponent,
-    DummyTableComponent,
+    ApiIntegrationTableComponent,
     LoginComponent ,
     HeaderComponent,
     EdituserComponent ,
@@ -38,6 +39,7 @@ import { MatTableModule } from '@angular/material/table';
     
   ],
  
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[DialogueboxComponent]
 })
 export class AppModule { }
